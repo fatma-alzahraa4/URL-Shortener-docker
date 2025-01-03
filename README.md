@@ -1,16 +1,16 @@
 # URL-Shortener-docker
 
 # Installation
-git clone https://github.com/your-repository/url-shortener
+git clone https://github.com/fatma-alzahraa4/URL-Shortener-docker.git
 npm install  #install dependencies if doesn't use docker
 
 # Environment variables:
 env file will be inside config directory (config/.env)
-DB_CONNECTION = "mongodb+srv://fatmaalzahraakhaled91:o6iiN8CVv9V61mGI@cluster0.ga0ji.mongodb.net/URL_Shortener"
+DB_CONNECTION = mongodb+srv://fatmaalzahraakhaled91:o6iiN8CVv9V61mGI@cluster0.ga0ji.mongodb.net/URL_Shortener
 REDIS_PORT = 6379
-REDIS_HOST = "finer-bedbug-27497.upstash.io"
-REDIS_PASSWORD = "AWtpAAIjcDEzMjYzYTgyNGRmYTM0OTQ4OTM2OTY2NGRjZjgxNTc4M3AxMA"
-PORT = "5000"
+REDIS_HOST = finer-bedbug-27497.upstash.io
+REDIS_PASSWORD = AWtpAAIjcDEzMjYzYTgyNGRmYTM0OTQ4OTM2OTY2NGRjZjgxNTc4M3AxMA
+PORT = 5000
 
 # Running the Application with Docker
 docker-compose up --build
