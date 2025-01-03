@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: node_app
+    ports:
+      - "3200:5000"
+    environment:
+      - DB_CONNECTION = mongodb+srv://fatmaalzahraakhaled91:o6iiN8CVv9V61mGI@cluster0.ga0ji.mongodb.net/URL_Shortener
+      - PORT = 5000
+      - SALT_ROUNDS = 8
+      - REDIS_PORT = 6379
+      - REDIS_HOST = finer-bedbug-27497.upstash.io
+      - REDIS_PASSWORD = AWtpAAIjcDEzMjYzYTgyNGRmYTM0OTQ4OTM2OTY2NGRjZjgxNTc4M3AxMA
+    depends_on:
+      - db  
+      - redis 
+    volumes:
+      - .:/app  
+    networks:
+      - backend
+
+  # redis service
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"  
+    networks:
+      - backend
+
+  # mongoDB service
+  db:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"  
+    volumes:
+      - mongo_data:/data/db  
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongo_data:
