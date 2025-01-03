@@ -1,22 +1,21 @@
+import { Types } from "mongoose"
+import joi from 'joi'
+const validationIdSchema = (value, helper) => {
+  return Types.ObjectId.isValid(value) ? true : helper.message('invalid id')
+}
+export const generalFields = {
+  _id: joi.string().custom(validationIdSchema),
+}
 const reqMethods = ['body', 'query', 'params', 'headers', 'file', 'files']
 export const validationCoreFunction = (schema) => {
   return (req, res, next) => {
-    const lang = req.params.lang || 'en'; // Default to English if no lang is provided
-
-    let validationMessage = '';
-    const preferences = { lang };
-
+    let validationMessage = ''
     for (const key of reqMethods) {
       if (schema[key]) {
         const validationResult = schema[key].validate(req[key], {
-          state: { preferences },
-          // abortEarly: false, 
         })
-        // if (validationResult.error) {
-        //   validationErrorArr.push(validationResult.error.details[0].message)
-        // }
         if (validationResult.error) {
-          validationMessage = validationResult.error.details[0].message;          
+          validationMessage = validationResult.error.details[0].message;
         }
       }
     }
